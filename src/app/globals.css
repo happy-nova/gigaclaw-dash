@@ -1,0 +1,196 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-display: "Orbitron", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Gigaverse palette */
+  --color-giga-900: #0e1925;
+  --color-giga-800: #0c384c;
+  --color-giga-700: #0f4a5c;
+  --color-giga-600: #0483ab;
+  --color-giga-500: #02c7d7;
+  --color-giga-400: #2dd4e4;
+  --color-giga-accent-red: #c45555;
+  --color-giga-accent-green: #2ecc71;
+  --color-giga-accent-orange: #f5a623;
+  --color-giga-accent-yellow: #f8d14e;
+  --color-giga-accent-gold: #ffd966;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0e1925;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(12, 56, 76, 0.8) 0%, transparent 50%),
+    linear-gradient(135deg, #0e1925 0%, #0a1520 100%);
+  min-height: 100vh;
+  color: #ffffff;
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: rgba(2, 199, 215, 0.4);
+  color: white;
+}
+
+/* Component classes */
+.input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: rgba(14, 25, 37, 0.6);
+  border: 1px solid rgba(15, 74, 92, 0.5);
+  color: white;
+  transition: all 0.2s;
+}
+
+.input-field::placeholder {
+  color: #6b7280;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #02c7d7;
+  box-shadow: 0 0 0 1px rgba(2, 199, 215, 0.5);
+}
+
+.btn-primary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  color: #0e1925;
+  background: linear-gradient(to right, #02c7d7, #2dd4e4);
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(to right, #2dd4e4, #02c7d7);
+  box-shadow: 0 0 40px rgba(2, 199, 215, 0.3);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  color: white;
+  background: #0c384c;
+  border: 1px solid rgba(4, 131, 171, 0.5);
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background: #0f4a5c;
+  border-color: rgba(2, 199, 215, 0.5);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+.card {
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(180deg, rgba(12, 56, 76, 0.5) 0%, rgba(14, 25, 37, 0.9) 100%);
+  border: 1px solid rgba(4, 131, 171, 0.3);
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5), 0 0 80px rgba(2, 199, 215, 0.05);
+  backdrop-filter: blur(8px);
+}
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(2, 199, 215, 0.5), 0 0 40px rgba(2, 199, 215, 0.3);
+}
+
+.shadow-glow {
+  box-shadow: 0 0 40px rgba(2, 199, 215, 0.3);
+}
+
+.shadow-glow-sm {
+  box-shadow: 0 0 20px rgba(2, 199, 215, 0.2);
+}
+
+/* Grid pattern background */
+.bg-grid {
+  background-image: linear-gradient(rgba(2, 199, 215, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(2, 199, 215, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Glow gradient */
+.bg-giga-glow {
+  background: radial-gradient(ellipse at 50% 30%, rgba(2, 199, 215, 0.08) 0%, transparent 60%);
+}
+
+/* Animated gradient border */
+.animated-border {
+  position: relative;
+}
+
+.animated-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, #02c7d7, #0483ab, #02c7d7, #0483ab);
+  background-size: 300% 300%;
+  animation: gradient-shift 4s ease infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Animations */
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
