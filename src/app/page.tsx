@@ -289,7 +289,11 @@ function OnboardingContent() {
               </div>
 
               <button
-                onClick={handleSlackConnect}
+                type="button"
+                onClick={() => {
+                  console.log("Button clicked - calling handleSlackConnect");
+                  handleSlackConnect();
+                }}
                 disabled={isLoading}
                 className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-lg font-semibold text-white bg-[#4A154B] hover:bg-[#5a1a5c] active:scale-[0.98] transition-all duration-200 disabled:opacity-50"
               >
