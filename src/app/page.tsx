@@ -159,14 +159,20 @@ function OnboardingContent() {
 
   const handleSlackConnect = () => {
     const clientId = process.env.NEXT_PUBLIC_SLACK_CLIENT_ID;
-    const redirectUri = encodeURIComponent(
-      process.env.NEXT_PUBLIC_SLACK_REDIRECT_URI || window.location.origin
-    );
+    const redirectUri = process.env.NEXT_PUBLIC_SLACK_REDIRECT_URI || window.location.origin;
+    
+    if (!clientId) {
+      setError("Slack Client ID not configured. Please set NEXT_PUBLIC_SLACK_CLIENT_ID.");
+      return;
+    }
+
     const scopes = encodeURIComponent(
       "app_mentions:read,channels:history,channels:read,chat:write,groups:history,groups:read,im:history,im:read,im:write,mpim:history,mpim:read,users:read"
     );
 
-    window.location.href = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&scope=${scopes}&redirect_uri=${redirectUri}`;
+    const authUrl = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&scope=${scopes}&redirect_uri=${encodeURIComponent(redirectUri)}`;
+    console.log("Redirecting to:", authUrl);
+    window.location.href = authUrl;
   };
 
   const handleCreateAgent = async () => {
