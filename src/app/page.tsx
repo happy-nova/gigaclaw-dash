@@ -159,13 +159,6 @@ function OnboardingContent() {
 
   const handleSlackConnect = () => {
     const clientId = process.env.NEXT_PUBLIC_SLACK_CLIENT_ID;
-    const redirectUri = process.env.NEXT_PUBLIC_SLACK_REDIRECT_URI || window.location.origin;
-    
-    // Debug logging
-    console.log("=== Slack Connect Debug ===");
-    console.log("NEXT_PUBLIC_SLACK_CLIENT_ID:", clientId || "NOT SET");
-    console.log("NEXT_PUBLIC_SLACK_REDIRECT_URI:", process.env.NEXT_PUBLIC_SLACK_REDIRECT_URI || "NOT SET (using origin)");
-    console.log("window.location.origin:", window.location.origin);
     
     if (!clientId) {
       const errorMsg = "Slack Client ID not configured. Please set NEXT_PUBLIC_SLACK_CLIENT_ID environment variable and redeploy.";
@@ -178,7 +171,8 @@ function OnboardingContent() {
       "app_mentions:read,channels:history,channels:read,chat:write,groups:history,groups:read,im:history,im:read,im:write,mpim:history,mpim:read,users:read"
     );
 
-    const authUrl = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&scope=${scopes}&redirect_uri=${encodeURIComponent(redirectUri)}`;
+    // Let Slack use the default redirect URL configured in the app
+    const authUrl = `https://slack.com/oauth/v2/authorize?client_id=${clientId}&scope=${scopes}`;
     console.log("Redirecting to:", authUrl);
     window.location.href = authUrl;
   };
