@@ -161,8 +161,16 @@ function OnboardingContent() {
     const clientId = process.env.NEXT_PUBLIC_SLACK_CLIENT_ID;
     const redirectUri = process.env.NEXT_PUBLIC_SLACK_REDIRECT_URI || window.location.origin;
     
+    // Debug logging
+    console.log("=== Slack Connect Debug ===");
+    console.log("NEXT_PUBLIC_SLACK_CLIENT_ID:", clientId || "NOT SET");
+    console.log("NEXT_PUBLIC_SLACK_REDIRECT_URI:", process.env.NEXT_PUBLIC_SLACK_REDIRECT_URI || "NOT SET (using origin)");
+    console.log("window.location.origin:", window.location.origin);
+    
     if (!clientId) {
-      setError("Slack Client ID not configured. Please set NEXT_PUBLIC_SLACK_CLIENT_ID.");
+      const errorMsg = "Slack Client ID not configured. Please set NEXT_PUBLIC_SLACK_CLIENT_ID environment variable and redeploy.";
+      console.error(errorMsg);
+      setError(errorMsg);
       return;
     }
 
